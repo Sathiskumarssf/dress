@@ -1,0 +1,33 @@
+ 
+ 
+.logo{
+    width: 10%;
+    height: 70px;
+}
+
+.container{
+    width: 100%;
+    margin-left: 30%;
+}
+ 
+ 
+ /* Media query for phones */
+ 
+  
+
+  /* Media query for small devices (e.g., smartphones) */
+@media only screen and (max-width: 767px) {
+    /* CSS rules for small devices */
+    .logo{
+        width: 20%;
+        height: 60px;
+        
+    }
+    .container{
+         
+        height: 20px;
+        margin-right: 0%;
+        width: 100%;
+    }
+  }
+  
