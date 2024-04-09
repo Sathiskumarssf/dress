@@ -10,7 +10,7 @@ const navbar = () => {
          
          <div className='col d-flex'>
          < img src={logo} alt="" srcset=""  className='logo img-fluid' />
-            <h1 className='HEADING'> DREES MALL</h1>
+            <h1 className='HEADING'> DRESS MALL</h1>
          </div>
          
          <div className='col'>

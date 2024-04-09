@@ -43,6 +43,22 @@ app.post('/register', (req, res) => {
 });
 
 
+app.post('/remove_product', (req, res) => {
+  const { itermcode } = req.body;
+  const sql = `DELETE FROM checkout  WHERE iterms_code = ?`;
+  
+  console.log(itermcode);   
+  db.query(sql, [itermcode], (err, result) => {
+      if (err) {
+          res.status(500).json({ error: err.message });
+      } else {
+          res.status(200).json({ message: 'User registered successfully' });
+      }
+  });
+});
+ 
+
+
 //checkout end point
 app.post('/checkout', (req, res) => {
   const {path,name,prize,gender,code } = req.body;
@@ -57,6 +73,7 @@ app.post('/checkout', (req, res) => {
     }
   });
 });
+
 app.post('/login', (req, res) => {
 
   const { email, password } = req.body;
@@ -80,6 +97,7 @@ app.post('/login', (req, res) => {
   });
 }
 )
+ 
 
 app.get('/', (req, res) => {
   res.send('Server is running');
