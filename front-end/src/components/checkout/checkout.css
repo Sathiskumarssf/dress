@@ -1,0 +1,27 @@
+.checkout-container{
+    width: 90%;
+    margin-left: 5%;
+    height: 90%;
+    border: solid 1px rgb(185, 142, 142);
+}
+
+.checkout-container-all{
+    width: 90%;
+    margin-left: 5%;
+    height: 90%;
+    border: solid 1px rgb(185, 142, 142);
+}
+
+.pyament{
+    margin-left: 30%;
+}
+ 
+
+@media screen and (max-width: 576px){
+    .checkout-container{
+     margin-left: 0%;
+    } 
+    .checkout-container-all{
+        margin-left: 0%;
+    }
+ }

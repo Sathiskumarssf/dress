@@ -27,6 +27,7 @@ db.connect(err => {
 app.use(bodyParser.json());
 
 // Register endpoint
+
 app.post('/register', (req, res) => {
   const { email, password } = req.body;
   const sql = `INSERT INTO login (email, password) VALUES (?, ?)`;
@@ -41,6 +42,21 @@ app.post('/register', (req, res) => {
   });
 });
 
+
+//checkout end point
+app.post('/checkout', (req, res) => {
+  const {path,name,prize,gender,code } = req.body;
+  const sql = `INSERT INTO checkout(path, name,  prize , gender, iterms_code) VALUES (?,?,?,?,?)`;
+  
+     
+  db.query(sql, [ path,name,prize,gender,code], (err, result) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+    } else {
+      res.status(200).json({ message: 'User registered successfully' });
+    }
+  });
+});
 app.post('/login', (req, res) => {
 
   const { email, password } = req.body;
@@ -64,10 +80,36 @@ app.post('/login', (req, res) => {
   });
 }
 )
-// Root endpoint
+
 app.get('/', (req, res) => {
   res.send('Server is running');
 });
+
+app.get("/products",(req,res)=>{
+  db.query("SELECT * FROM  products",(err,result) =>{
+    if(err){
+      console.log(err);
+    }else{
+      res.send(result)
+    }
+  })
+}
+)
+app.get("/checkoutproducts",(req,res)=>{
+  db.query("SELECT `path`, `name`, `prize`, `gender`, `iterms_code` FROM `checkout` WHERE 1",(err,result) =>{
+    if(err){
+      console.log(err);
+
+    }else{
+      res.send(result);
+       
+    }
+  })
+}
+)
+
+// Root endpoint
+ 
 
 // Start server
 app.listen(port, () => {

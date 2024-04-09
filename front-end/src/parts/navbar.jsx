@@ -4,12 +4,16 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import logo from '../sources/logo.gif';
 import './navbar.css'
 
-const Navbar = () => {
+const navbar = () => {
   return (
-     <div className='navbar-containor d-flex flex-row m-1'>
-         <img src={logo} alt="" srcset=""  className='logo img-fluid' />
+     <div className='navbar-containor    row m-1'>
          
-         <div >
+         <div className='col d-flex'>
+         < img src={logo} alt="" srcset=""  className='logo img-fluid' />
+            <h1 className='HEADING'> DREES MALL</h1>
+         </div>
+         
+         <div className='col'>
          <div className="container w-90 p-1 ml-sm-1  "  >
           
           <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -41,10 +45,7 @@ const Navbar = () => {
                       <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                       </li>
                   </ul>
-                  <form class="d-flex" role="search">
-                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                      <button class="btn btn-outline-success" type="submit" >Search</button>
-                  </form>
+                  
                   </div>
               </div>
               </nav>
@@ -54,6 +55,6 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default navbar
 
 
