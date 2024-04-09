@@ -4,7 +4,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import {Link}  from 'react-router-dom';
-   
+import Navbar from '../../parts/Navbar'
+ import './checkout.css'
 
 const Checkout = () => {
     const [products, setProducts] = useState([]);
@@ -47,8 +48,9 @@ const Checkout = () => {
 
     return (
         <div className='checkout-container'>
-            <h1 className='text-center'>Welcome to Cart</h1>
+            <Navbar/>
             <div className='checkout-container-all m-5'>
+            <h1 className='text-center'>Welcome to Cart</h1>
                 <table className="table   border-secoundary">
                     <thead className="table-dark">
                         <tr>
@@ -66,10 +68,10 @@ const Checkout = () => {
                                 <td>{product.name}</td>
                                 <td>{product.prize}</td>
                                 <td style={{width:'20%'}} >
-                                    <div className='d-flex' style={{ justifyContent: 'space-arround'}}>
-                                    <button className='btn btn-success  ' onClick={() => decreaseQuantity(product.iterms_code)}>-</button>
-                                    <h2>{product.quantity}</h2>
-                                    <button className='btn btn-success  ' onClick={() => increaseQuantity(product.iterms_code)}>+</button>
+                                    <div className='d-flex ' >
+                                    <button className='decress  btn btn-success' onClick={() => decreaseQuantity(product.iterms_code)}>-</button>
+                                    <h2 style={{marginLeft:'2rem'}}>{product.quantity}</h2>
+                                    <button className='increse btn btn-success  ' onClick={() => increaseQuantity(product.iterms_code)}>+</button>
                                     </div>
                                     
                                 </td>
@@ -81,10 +83,10 @@ const Checkout = () => {
 
                  <div className='d-flex'>
                         <h1>Total price: {totalPrice}</h1> </div>{/* Display total price */}
-                        <Link to="/card">
+                        <Link to={`/card?totalPrice=${totalPrice}`}>
+                    <button className='btn btn-primary'>Payment</button>
+                    </Link>
 
-                        <button className='btn btn-primary'>  Payment</button>
-                        </Link>
                 </div>
         </div>
     );

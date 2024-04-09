@@ -1,19 +1,13 @@
-.checkout-container{
-    width: 90%;
-    margin-left: 5%;
-    height: 90%;
-    border: solid 1px rgb(185, 142, 142);
-}
 
-.checkout-container-all{
-    width: 90%;
-    margin-left: 5%;
-    height: 90%;
-    border: solid 1px rgb(185, 142, 142);
-}
+ 
 
 .pyament{
     margin-left: 30%;
+}
+
+
+.increse {
+    margin-left: 2rem;
 }
  
 
