@@ -103,16 +103,21 @@ app.get('/', (req, res) => {
   res.send('Server is running');
 });
 
-app.get("/products",(req,res)=>{
-  db.query("SELECT * FROM  products",(err,result) =>{
-    if(err){
+app.get("/products", (req, res) => {
+  const { query } = req.query; // Extract the query parameter from the URL query string
+  const sql = "SELECT * FROM products WHERE name LIKE ?";
+  const searchTerm = `%${query}%`;
+  console.log(query);
+  db.query(sql, [searchTerm], (err, result) => {
+    if (err) {
       console.log(err);
-    }else{
-      res.send(result)
+      res.status(500).json({ error: 'An error occurred while fetching products' });
+    } else {
+      res.send(result);
     }
-  })
-}
-)
+  });
+});
+
 app.get("/checkoutproducts", (req, res) => {
   const { useremail } = req.query; // Use req.query to access query parameters
   const sql = "SELECT `path`, `name`, `prize`, `gender`, `iterms_code` FROM `checkout` WHERE useremail = ?";
