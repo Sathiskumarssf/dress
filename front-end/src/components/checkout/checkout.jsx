@@ -12,10 +12,10 @@ const Checkout = () => {
     const useremail = new URLSearchParams(location.search).get('useremail');
 
     useEffect(() => {
-        fetchCheckoutProducts(useremail);
-    }, [useremail]);
+        fetchCheckoutProducts( );
+    }, []);
     
-    const fetchCheckoutProducts = async (useremail) => {
+    const fetchCheckoutProducts = async () => {
         try {
             const result = await axios.get("http://localhost:5000/checkoutproducts", {
                 params: { useremail } // Pass useremail as a query parameter
