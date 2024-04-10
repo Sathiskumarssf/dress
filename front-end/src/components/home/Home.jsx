@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import {Link}  from 'react-router-dom';
+import { useLocation  } from 'react-router-dom';
 import Navbar from '../../parts/Navbar';
 import './home.css'
 
 const Home = () => {
 
-     
+  const location = useLocation();
+  const useremail = new URLSearchParams(location.search).get('email');
+
      const [message, setMessage] = useState('');
     const [products,setprodusts]=useState([])
    
@@ -14,14 +17,16 @@ const Home = () => {
         fetchData();
     })
 
-    async function storetocheckout(path,name,prize,gender,code){
+    async function storetocheckout( path,name,prize,gender,code,useremail){
       try{
-          const response = await axios.post('http://localhost:5000/checkout', { path,name,prize,gender,code});
+          const response = await axios.post('http://localhost:5000/checkout', {  path,name,prize,gender,code,useremail});
           setMessage(response.data.message);
-          alert(message)
+          alert(message )
+           
+          
     } catch (error) {
            setMessage(error.response.data.error);
-           alert(message)
+       
     }
     }
 
@@ -38,7 +43,7 @@ const Home = () => {
     <div> 
         <Navbar/>
          {/* <button className='checkout-btn btn btn-success' >Go To Checkout</button>   */}
-         <Link to="/checkout">
+         <Link to={`/checkout?useremail=${useremail}`}>
             <button type="button" class="checkout-btn btn btn-success">Go To Checkout</button>
           
           </Link>
@@ -54,11 +59,12 @@ const Home = () => {
             <h1  >{product.name}</h1>
             <div  >{product.prize}</div>
             <div  >{product.gender}</div>
-            <button className='btn btn-primary' onClick={() => storetocheckout(product.img_path, product.name, product.prize, product.gender, product.itermscode)}>Add to checkout</button>
+            <button className='btn btn-primary' onClick={() => storetocheckout(product.img_path, product.name, product.prize, product.gender, product.itermscode,useremail)}>Add to checkout</button>
           </li>
         ))}
       </ul>
     </div>
+   
         </div>
     </div>
   )

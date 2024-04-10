@@ -19,7 +19,7 @@ const LoginForm = () => {
       const response = await axios.post('http://localhost:5000/login', { email, password });
       setMessage(response.data.message);
       if (response.data.message === 'User login successfully') {
-        navigate('/home'); // Redirect to the home page after successful login
+        navigate(`/home?email=${email}`); // Redirect to the home page after successful login
       }
     } catch (error) {
       setMessage(error.response.data.error);

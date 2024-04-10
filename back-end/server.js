@@ -61,11 +61,11 @@ app.post('/remove_product', (req, res) => {
 
 //checkout end point
 app.post('/checkout', (req, res) => {
-  const {path,name,prize,gender,code } = req.body;
-  const sql = `INSERT INTO checkout(path, name,  prize , gender, iterms_code) VALUES (?,?,?,?,?)`;
+  const {path,name,prize,gender,code,useremail } = req.body;
+  const sql = `INSERT INTO checkout(path, name,  prize , gender, iterms_code,useremail) VALUES (?,?,?,?,?,?)`;
   
      
-  db.query(sql, [ path,name,prize,gender,code], (err, result) => {
+  db.query(sql, [ path,name,prize,gender,code,useremail], (err, result) => {
     if (err) {
       res.status(500).json({ error: err.message });
     } else {
@@ -113,18 +113,18 @@ app.get("/products",(req,res)=>{
   })
 }
 )
-app.get("/checkoutproducts",(req,res)=>{
-  db.query("SELECT `path`, `name`, `prize`, `gender`, `iterms_code` FROM `checkout` WHERE 1",(err,result) =>{
-    if(err){
+app.get("/checkoutproducts", (req, res) => {
+  const { useremail } = req.query; // Use req.query to access query parameters
+  const sql = "SELECT `path`, `name`, `prize`, `gender`, `iterms_code` FROM `checkout` WHERE useremail = ?";
+  db.query(sql, [useremail], (err, result) => {
+    if (err) {
       console.log(err);
-
-    }else{
-      res.send(result);
-       
+      res.status(500).json({ error: "Something went wrong while fetching checkout products" });
+    } else {
+      res.status(200).json(result);
     }
-  })
-}
-)
+  });
+});
 
 // Root endpoint
  

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link,useNavigate,useLocation } from 'react-router-dom';
 import Navbar from '../../parts/Navbar';
 import './checkout.css';
 
@@ -8,19 +8,24 @@ const Checkout = () => {
     const [products, setProducts] = useState([]);
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
+    const location = useLocation();
+    const useremail = new URLSearchParams(location.search).get('useremail');
 
     useEffect(() => {
-        fetchCheckoutProducts();
-    }, []);
-
-    const fetchCheckoutProducts = async () => {
+        fetchCheckoutProducts(useremail);
+    }, [useremail]);
+    
+    const fetchCheckoutProducts = async (useremail) => {
         try {
-            const result = await axios("http://localhost:5000/checkoutproducts");
+            const result = await axios.get("http://localhost:5000/checkoutproducts", {
+                params: { useremail } // Pass useremail as a query parameter
+            });
             setProducts(result.data.map(product => ({ ...product, quantity: 1 })));
         } catch (err) {
             console.log("Something went wrong while fetching checkout products");
         }
     };
+    
 
 
     const removeItem = async (productCode, e) => {
@@ -110,6 +115,7 @@ const Checkout = () => {
                     <button className='btn btn-primary'>Payment</button>
                 </Link>
             </div>
+            
         </div>
     );
 };
