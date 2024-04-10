@@ -1,6 +1,8 @@
 .product-container-all{
     background: rgb(38,38,70);
     background: linear-gradient(90deg, rgba(38,38,70,1) 4%, rgba(157,170,174,1) 100%);
+    width: 100vw;
+    height: 100vh;
 }
 
 .product-container{
@@ -12,11 +14,15 @@
     background: linear-gradient(90deg, rgba(38,38,70,1) 4%, rgba(157,170,174,1) 100%);
 }
 
-.product-container-iterms{
+.product-container-items{
     border: 1px solid whitesmoke;
     width: 30%;
     border-radius: 10px;
     transition: all 0.3s ease;
+}
+
+.serchbar-heading{
+    flex-direction: row;
 }
 
 .checkout-btn{
@@ -29,7 +35,7 @@
      cursor: pointer;
 }
 
-.product-container-iterms:hover{
+.product-container-items:hover{
     transform: scale(1.1);
 }
 .product-image{
