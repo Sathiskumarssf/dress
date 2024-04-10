@@ -49,7 +49,7 @@ const LoginForm = () => {
             </form>
             {message && <p>{message}</p>}
             <h2>Don't have an account?</h2>
-            <Link to="/register">
+            <Link to="/">
               <button type="button" className="btn btn-primary">Register</button>
             </Link>
           </div>
