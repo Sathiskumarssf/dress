@@ -52,6 +52,17 @@
      border-top-right-radius: 100px;
      border-bottom-right-radius: 100px;
 }
+.checkout-btn1{
+     height: 3rem;
+     width: 10rem;
+     position: fixed;
+     top: 50%;
+     left: 0%;
+     z-index: 999;
+     cursor: pointer;
+     border-top-right-radius: 100px;
+     border-bottom-right-radius: 100px;
+}
 
 .product-container-items:hover{
     transform: scale(1.1);
@@ -67,7 +78,7 @@
     opacity: 1;
 }
 @media screen and (max-width: 576px){
-   .product-container-iterms{
+   .product-container-items{
     width: 90%;
    } 
 

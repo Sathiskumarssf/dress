@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link,useNavigate,useLocation } from 'react-router-dom';
+import { BiUserCircle } from '../../../node_modules/react-icons/bi'; 
 import Navbar from '../../parts/Navbar';
 import './checkout.css';
 
@@ -10,6 +11,8 @@ const Checkout = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const useremail = new URLSearchParams(location.search).get('useremail');
+    const userName = new URLSearchParams(location.search).get('username');
+    const useraddress = new URLSearchParams(location.search).get('useraddress');
 
     useEffect(() => {
         fetchCheckoutProducts( );
@@ -72,6 +75,9 @@ const Checkout = () => {
     return (
         <div className='checkout-container'>
             <Navbar />
+            <Link  to={`/userprofile?email=${useremail}&username=${userName}&useraddress=${useraddress}`}  className='profile'>
+                  <button className='profile-btn'  > < BiUserCircle  size={60} className="user-icon"/> </button>
+           </Link>
             <div className='checkout-container-all m-5'>
                 <h1 className='text-center'>Welcome to Cart</h1>
                 <table className="table border-secoundary">
@@ -111,7 +117,7 @@ const Checkout = () => {
                     <h1>Total price: {totalPrice}</h1>
                 </div>
                 {/* Display total price */}
-                <Link to={`/card?totalPrice=${totalPrice}`}>
+                <Link to={`/card?totalPrice=${totalPrice}&email=${useremail}&username=${userName}&useraddress=${useraddress}`}>
                     <button className='btn btn-primary'>Payment</button>
                 </Link>
             </div>
