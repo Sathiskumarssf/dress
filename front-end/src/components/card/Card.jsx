@@ -1,7 +1,8 @@
 import React from 'react';
 import { Card, Form, Button } from 'react-bootstrap';
-import { useLocation  } from 'react-router-dom';
+import { useLocation,Link  } from 'react-router-dom';
 import Navbar from '../../parts/Navbar';
+import { BiUserCircle } from '../../../node_modules/react-icons/bi'; 
 import { useState,useEffect } from 'react';
 import coverpage from '../../sources/coverimage.avif'
 import './card.css'
@@ -9,7 +10,9 @@ import './card.css'
 const MyCard = () => {
      const location = useLocation();
      const totalPrice = new URLSearchParams(location.search).get('totalPrice');
-
+     const useremail = new URLSearchParams(location.search).get('email');
+     const username = new URLSearchParams(location.search).get('username');
+     const useraddress = new URLSearchParams(location.search).get('useraddress');
      
       const [showButton, setShowButton] = useState(false);
       const handleHideButtonClick = () => {
@@ -75,6 +78,9 @@ const MyCard = () => {
   return (
     <div>
         <Navbar/>
+                  <Link  to={`/userprofile?email=${useremail}&username=${username}&useraddress=${useraddress}`}  className='profile'>
+                  <button className='profile-btn'  > < BiUserCircle  size={60} className="user-icon"/> </button>
+                  </Link>
     <div className='container-all  '>
         <div class="containerx">
         <div class="arrange d-flex">

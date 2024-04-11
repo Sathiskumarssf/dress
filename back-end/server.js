@@ -29,15 +29,16 @@ app.use(bodyParser.json());
 // Register endpoint
 
 app.post('/register', (req, res) => {
-  const { email, password } = req.body;
-  const sql = `INSERT INTO login (email, password) VALUES (?, ?)`;
+  const { email, password ,name,address} = req.body;
+  const sql = `INSERT INTO login (email, password, name, address) VALUES (?, ?, ?, ?)`;
   
      
-  db.query(sql, [email, password], (err, result) => {
+  db.query(sql, [email, password,name,address], (err, result) => {
     if (err) {
       res.status(500).json({ error: err.message });
     } else {
       res.status(200).json({ message: 'User registered successfully' });
+      
     }
   });
 });
@@ -53,6 +54,19 @@ app.post('/remove_product', (req, res) => {
           res.status(500).json({ error: err.message });
       } else {
           res.status(200).json({ message: 'User registered successfully' });
+      }
+  });
+});
+app.post('/userinformation', (req, res) => {
+  const { useremail } = req.body;
+  const sql = `SELECT  name, address FROM login WHERE email = ?`;
+  
+    
+  db.query(sql, [useremail], (err, result) => {
+      if (err) {
+          res.status(500).json({ error: err.message });
+      } else {
+        res.send(result);
       }
   });
 });
@@ -93,7 +107,7 @@ app.post('/login', (req, res) => {
       return res.status(401).json({ message: 'Incorrect password' });
     }
 
-    res.status(200).json({ message: 'User login successfully' });
+    res.send(results);
   });
 }
 )

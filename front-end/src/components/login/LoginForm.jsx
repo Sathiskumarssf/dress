@@ -11,23 +11,27 @@ const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+   
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:5000/login', { email, password });
-      setMessage(response.data.message);
-      if (response.data.message === 'User login successfully') {
-        navigate(`/home?email=${email}`); // Redirect to the home page after successful login
-      }
+      const userData = response.data[0]; // Access data property of response
+      
+      navigate(`/home?email=${email}&username=${userData.name}&useraddress=${userData.address}`); // Redirect to the home page after successful login
     } catch (error) {
-      setMessage(error.response.data.error);
+      console.error('Error during login:', error);
+      // Handle error, e.g., display error message to the user
     }
-  };
+  }
+  
 
+   
   return (
     <div>
+       
       <Navbar />
       <div className='login-container'>
         <div className='box'>
